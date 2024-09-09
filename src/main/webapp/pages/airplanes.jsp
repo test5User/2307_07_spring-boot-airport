@@ -16,7 +16,9 @@
                 <td>${plane.model}</td>
                 <td>${plane.places}</td>
                 <td>
-
+                    <c:if test="${empty plane.flights}">
+                        <a href="/delPlane/${plane.id}">Delete</a>
+                    </c:if>
                 </td>
             </tr>
         </c:forEach>
@@ -24,6 +26,10 @@
 
     <p>
         <a href="/pages/add-plane.jsp">Buy new Airplane</a>
+    </p>
+
+    <p>
+        <a href="/">Main Page</a>
     </p>
 </body>
 </html>

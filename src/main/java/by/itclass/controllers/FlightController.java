@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -48,4 +49,28 @@ public class FlightController {
         flightRepository.save(flight);
         return "redirect:/allFlights";
     }
+
+    @GetMapping("/viewFlight/{id}")
+    public String viewFlight(
+            @PathVariable(name = "id") int flightId,
+            Model model) {
+        model.addAttribute("flight", flightRepository.findById(flightId).get());
+        return "flight-info";
+    }
+
+    @GetMapping("/delFlight/{id}")
+    public String delFlight(@PathVariable(name = "id") int id) {
+        flightRepository.deleteById(id);
+        return "redirect:/allFlights";
+    }
+
+    @GetMapping("/updFlight/{id}")
+    public String updFlight(@PathVariable(name = "id") int id,
+                            Model model) {
+        var updFlight = flightRepository.findById(id).get();
+        model.addAttribute("updFlight", updFlight);
+        model.addAttribute("currentPlanes", airplaneRepository.findAll());
+        return "upd-flight";
+    }
+
 }
