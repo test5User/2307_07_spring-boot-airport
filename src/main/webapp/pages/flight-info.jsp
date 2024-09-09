@@ -8,6 +8,11 @@
     <h1>Flight number : ${flight.number}</h1>
     <h2>Airplane : ${flight.airplane.model}</h2>
     <h1>Passengers:</h1>
+
+    <p>
+        <a href="/pages/add-pass.jsp?flightId=${flight.id}">Add passenger</a>
+    </p>
+
     <table border="1">
         <tr>
             <th>FIO</th>
@@ -19,8 +24,8 @@
                 <td>${passenger.fio}</td>
                 <td>${passenger.place}</td>
                 <td>
-
-
+                    <a href="/delPass/${flight.id}/${passenger.id}">Delete</a>
+                    <a href="/updPass/${passenger.id}">Update</a>
                 </td>
             </tr>
         </c:forEach>

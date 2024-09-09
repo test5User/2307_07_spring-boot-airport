@@ -41,11 +41,14 @@ public class FlightController {
 
     @PostMapping("/saveFlight")
     public String saveFlight(
+            @RequestParam(name = "id", required = false) Integer id,
             @RequestParam(name = "number") String number,
             @RequestParam(name = "direction") String direction,
             @RequestParam(name = "planeId") int planeId) {
         var plane = airplaneRepository.findById(planeId).get();
-        var flight = new Flight(number, direction, plane);
+        var flight = id == null
+                ? new Flight(number, direction, plane)
+                : new Flight(id, number, direction, plane);
         flightRepository.save(flight);
         return "redirect:/allFlights";
     }

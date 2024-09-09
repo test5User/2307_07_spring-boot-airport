@@ -8,6 +8,7 @@ import lombok.*;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Getter @Setter
+@AllArgsConstructor
 public class Passenger {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,5 +16,5 @@ public class Passenger {
     @NonNull private String fio;
     @NonNull private String place;
     @ManyToOne
-    private Flight flight;
+    @NonNull private Flight flight;
 }
